@@ -1417,6 +1417,14 @@ static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
 
+static const u8 sShadowClawDescription[] = _(
+    "A swift spectral slash with\n"
+    "a high critical-hit ratio.");
+
+static const u8 sShadowSneakDescription[] = _(
+    "Vanishes swiftly into darkness.\n"
+    "Always strikes first.");
+
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
@@ -1774,4 +1782,6 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+    [MOVE_SHADOW_CLAW - 1] = sShadowClawDescription,
+    [MOVE_SHADOW_SNEAK - 1] = sShadowSneakDescription,
 };

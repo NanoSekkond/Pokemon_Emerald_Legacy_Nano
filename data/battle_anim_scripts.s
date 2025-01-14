@@ -371,6 +371,8 @@ gBattleAnims_Moves::
 	.4byte Move_WATER_PULSE
 	.4byte Move_DOOM_DESIRE
 	.4byte Move_PSYCHO_BOOST
+	.4byte Move_SHADOW_CLAW
+	.4byte Move_SHADOW_SNEAK
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -9550,6 +9552,52 @@ Move_PSYCHO_BOOST:
 	call UnsetPsychicBackground
 	end
 
+Move_SHADOW_CLAW:
+	loadspritegfx ANIM_TAG_CLAW_SLASH
+	monbg ANIM_ATTACKER
+	fadetobg BG_GHOST
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
+	waitbgfadein
+	setalpha 16, 0
+	createvisualtask AnimTask_AttackerFadeToInvisible, 2, 0
+	waitforvisualfinish
+	delay 20
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, -10, -10, 0
+	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, -10, 10, 0
+	delay 10
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, 10, -10, 1
+	createsprite gClawSlashSpriteTemplate, ANIM_TARGET, 2, 10, 10, 1
+	createsprite gShakeMonOrTerrainSpriteTemplate, ANIM_ATTACKER, 2, -4, 1, 10, 3, 1
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_AttackerFadeFromInvisible, 2, 1
+	waitforvisualfinish
+	blendoff
+	clearmonbg ANIM_ATTACKER
+	restorebg
+	waitbgfadein
+	end
+
+Move_SHADOW_SNEAK:
+	loadspritegfx ANIM_TAG_IMPACT
+	fadetobg BG_GHOST
+	waitbgfadein
+	monbg ANIM_ATK_PARTNER
+	setalpha 9, 8
+	createvisualtask AnimTask_AttackerPunchWithTrace, 2, RGB_BLACK, 13
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER
+	delay 6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_TARGET, 1
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	restorebg
+	waitbgfadein
+	end
 Move_KNOCK_OFF:
 	loadspritegfx ANIM_TAG_SLAM_HIT_2
 	loadspritegfx ANIM_TAG_IMPACT
