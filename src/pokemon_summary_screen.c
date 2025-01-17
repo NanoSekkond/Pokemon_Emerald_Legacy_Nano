@@ -81,7 +81,7 @@ enum {
 // Moves screen
 #define PSS_LABEL_WINDOW_MOVES_POWER_ACC 14 // Also contains the power and accuracy values
 #define PSS_LABEL_WINDOW_MOVES_APPEAL_JAM 15
-#define PSS_LABEL_WINDOW_UNUSED2 16
+#define PSS_LABEL_WINDOW_CATEGORY_ICON 16
 
 // Above/below the pokemon's portrait (left)
 #define PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER 17
@@ -314,6 +314,8 @@ static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n);
 static void BufferIvOrEvStats(u8 mode);
+static void HideCategoryIcon();
+static void ShowCategoryIcon(u8);
 
 // const rom data
 #include "data/text/move_descriptions.h"
@@ -533,14 +535,14 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .paletteNum = 6,
         .baseBlock = 367,
     },
-    [PSS_LABEL_WINDOW_UNUSED2] = {
+    [PSS_LABEL_WINDOW_CATEGORY_ICON] = {
         .bg = 0,
-        .tilemapLeft = 22,
-        .tilemapTop = 4,
-        .width = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 15,
+        .width = 2,
         .height = 2,
-        .paletteNum = 6,
-        .baseBlock = 387,
+        .paletteNum = 9,
+        .baseBlock = 679,
     },
     [PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER] = {
         .bg = 0,
@@ -709,6 +711,9 @@ static const u8 sButtons_Gfx[][4 * TILE_SIZE_4BPP] = {
     INCBIN_U8("graphics/summary_screen/a_button.4bpp"),
     INCBIN_U8("graphics/summary_screen/b_button.4bpp"),
 };
+
+static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/summary_screen/split_icons_summary_screen.gbapal");
+static const u8 sSplitIcons_Gfx[] = INCBIN_U8("graphics/summary_screen/split_icons_summary_screen.4bpp");
 
 static void (*const sTextPrinterFunctions[])(void) =
 {
@@ -2042,6 +2047,7 @@ static void ChangeSelectedMove(s16 *taskData, s8 direction, u8 *moveIndexPtr)
         && sMonSummaryScreen->newMove == MOVE_NONE)
     {
         ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+        HideCategoryIcon();
         ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM);
         ScheduleBgCopyTilemapToVram(0);
         HandlePowerAccTilemap(0, 3);
@@ -2068,6 +2074,7 @@ static void CloseMoveSelectMode(u8 taskId)
     if (sMonSummaryScreen->firstMoveIndex != MAX_MON_MOVES)
     {
         ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+        HideCategoryIcon();
         ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM);
         HandlePowerAccTilemap(0, 3);
         HandleAppealJamTilemap(0, 3, 0);
@@ -2286,6 +2293,7 @@ static bool8 CanReplaceMove(void)
 static void ShowCantForgetHMsWindow(u8 taskId)
 {
     ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+    HideCategoryIcon();
     ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM);
     ScheduleBgCopyTilemapToVram(0);
     HandlePowerAccTilemap(0, 3);
@@ -2494,6 +2502,7 @@ static void Task_ShowPowerAccWindow(u8 taskId)
         {
             if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
                 PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+	            PutWindowTilemap(PSS_LABEL_WINDOW_CATEGORY_ICON);
         }
         else
         {
@@ -2939,6 +2948,7 @@ static void PutPageWindowTilemaps(u8 page)
         {
             if (sMonSummaryScreen->newMove != MOVE_NONE || sMonSummaryScreen->firstMoveIndex != MAX_MON_MOVES)
                 PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+	            PutWindowTilemap(PSS_LABEL_WINDOW_CATEGORY_ICON);
         }
         else
         {
@@ -2989,6 +2999,7 @@ static void ClearPageWindowTilemaps(u8 page)
         {
             if (sMonSummaryScreen->newMove != MOVE_NONE || sMonSummaryScreen->firstMoveIndex != MAX_MON_MOVES)
                 ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+                HideCategoryIcon();
         }
         else
         {
@@ -3703,6 +3714,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
         }
 
         PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 17, 0, 0);
+        ShowCategoryIcon(gBattleMoves[moveIndex].category);
     }
 }
 
@@ -4344,4 +4356,15 @@ static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
 
     ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
+}
+
+static void HideCategoryIcon() {
+    FillWindowPixelRect(PSS_LABEL_WINDOW_CATEGORY_ICON, PIXEL_FILL(0), 2, 1, 16, 16);
+    CopyWindowToVram(PSS_LABEL_WINDOW_CATEGORY_ICON, 3);
+}
+
+static void ShowCategoryIcon(u8 category) {
+	LoadPalette(sSplitIcons_Pal, 9 * 0x10, 0x20);
+	BlitBitmapToWindow(PSS_LABEL_WINDOW_CATEGORY_ICON, sSplitIcons_Gfx + 0x80 * category, 3, 0, 16, 16);
+	CopyWindowToVram(PSS_LABEL_WINDOW_CATEGORY_ICON, 3);
 }
