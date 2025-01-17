@@ -2210,7 +2210,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                         {
                                             .species = SPECIES_SCEPTILE,
                                             .heldItem = ITEM_MIRACLE_SEED,
-                                            .moves = {MOVE_LEAF_BLADE, MOVE_GROWTH, MOVE_FAKE_OUT, MOVE_DRAGON_CLAW},
+                                            .moves = {MOVE_LEAF_BLADE, MOVE_GROWTH, MOVE_FAKE_OUT, MOVE_DRAGON_BREATH},
                                             .hpEV = 6,
                                             .speedEV = 252,
                                             .spAttackEV = 252,
@@ -2269,7 +2269,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                         {
                                             .species = SPECIES_SCEPTILE,
                                             .heldItem = ITEM_MIRACLE_SEED,
-                                            .moves = {MOVE_LEAF_BLADE, MOVE_GROWTH, MOVE_FAKE_OUT, MOVE_DRAGON_CLAW},
+                                            .moves = {MOVE_LEAF_BLADE, MOVE_GROWTH, MOVE_FAKE_OUT, MOVE_DRAGON_BREATH},
                                             .hpEV = 6,
                                             .speedEV = 252,
                                             .spAttackEV = 252,
@@ -2616,7 +2616,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                         {
                                             .species = SPECIES_BANETTE,
                                             .heldItem = ITEM_QUICK_CLAW,
-                                            .moves = {MOVE_THUNDER, MOVE_SHADOW_BALL, MOVE_RAIN_DANCE, MOVE_GRUDGE},
+                                            .moves = {MOVE_THUNDER, MOVE_SHADOW_CLAW, MOVE_RAIN_DANCE, MOVE_GRUDGE},
                                             .hpEV = 255,
                                             .defenseEV = 155,
                                             .spDefenseEV = 100,
@@ -4708,7 +4708,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                         {
                                             .species = SPECIES_SCEPTILE,
                                             .heldItem = ITEM_PETAYA_BERRY,
-                                            .moves = {MOVE_LEAF_BLADE, MOVE_FAKE_OUT, MOVE_DRAGON_CLAW, MOVE_ENDURE},
+                                            .moves = {MOVE_LEAF_BLADE, MOVE_FAKE_OUT, MOVE_DRAGON_BREATH, MOVE_ENDURE},
                                             .speedEV = 255,
                                             .spAttackEV = 255,
                                             .otId = TRAINER_HILL_OTID,
@@ -4765,7 +4765,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                         {
                                             .species = SPECIES_SCEPTILE,
                                             .heldItem = ITEM_PETAYA_BERRY,
-                                            .moves = {MOVE_SOLAR_BEAM, MOVE_FAKE_OUT, MOVE_DRAGON_CLAW, MOVE_ENDURE},
+                                            .moves = {MOVE_SOLAR_BEAM, MOVE_FAKE_OUT, MOVE_DRAGON_BREATH, MOVE_ENDURE},
                                             .speedEV = 252,
                                             .spAttackEV = 252,
                                             .otId = TRAINER_HILL_OTID,

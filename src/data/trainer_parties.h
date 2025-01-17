@@ -3402,7 +3402,7 @@ static const struct TrainerMon sParty_Phoebe[] = {
     .lvl = 53,
     .species = SPECIES_BANETTE,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_REVENGE, MOVE_DESTINY_BOND}
+    .moves = {MOVE_SHADOW_CLAW, MOVE_THUNDER_PUNCH, MOVE_REVENGE, MOVE_DESTINY_BOND}
     },
     {
     .iv = 250,
@@ -13671,7 +13671,7 @@ static const struct TrainerMon sParty_Zinnia[] = {
     .lvl = 70,
     .species = SPECIES_SCEPTILE,
     .heldItem = ITEM_LEFTOVERS,
-    .moves = {MOVE_LEECH_SEED, MOVE_DRAGON_CLAW, MOVE_LEAF_BLADE, MOVE_DOUBLE_TEAM}
+    .moves = {MOVE_LEECH_SEED, MOVE_DRAGON_BREATH, MOVE_LEAF_BLADE, MOVE_DOUBLE_TEAM}
     },
     {
     .iv = 150,
@@ -13881,7 +13881,7 @@ static const struct TrainerMon sParty_Drake2[] = {
     .species = SPECIES_SCEPTILE,
     .heldItem = ITEM_PETAYA_BERRY,
     .evs = {0, 0, 0, 252, 252, 0},
-    .moves = {MOVE_LEAF_BLADE, MOVE_DRAGON_CLAW, MOVE_THUNDER_PUNCH, MOVE_ENDURE}
+    .moves = {MOVE_LEAF_BLADE, MOVE_DRAGON_BREATH, MOVE_THUNDER_PUNCH, MOVE_ENDURE}
     },
     {
     .iv = 255,
