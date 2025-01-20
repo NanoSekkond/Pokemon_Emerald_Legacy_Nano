@@ -762,15 +762,15 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 49, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPower;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 106);
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, x, 33, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAccuracy;
     x = GetStringRightAlignXOffset(FONT_NORMAL, str, 106);
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, x, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, x, 49, TEXT_SKIP_DRAW, NULL);
     if (chosenMove == LIST_CANCEL)
     {
         // On "Cancel", skip printing move data
@@ -779,11 +779,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     move = &gBattleMoves[chosenMove];
     str = gTypeNames[move->type];
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 25, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 17, TEXT_SKIP_DRAW, NULL);
 
     x = 4 + GetStringWidth(FONT_NORMAL, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, buffer, x, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, buffer, x, 49, TEXT_SKIP_DRAW, NULL);
 
     if (move->power < 2)
     {
@@ -794,7 +794,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 25, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 33, TEXT_SKIP_DRAW, NULL);
 
     if (move->accuracy == 0)
     {
@@ -805,7 +805,21 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 49, TEXT_SKIP_DRAW, NULL);
+
+    switch(move->category) {
+        case MOVE_CATEGORY_PHYSICAL:
+            str = gText_MoveRelearnerPhysical;
+            break;
+        case MOVE_CATEGORY_SPECIAL:
+            str = gText_MoveRelearnerSpecial;
+            break;
+        case MOVE_CATEGORY_STATUS:
+            str = gText_MoveRelearnerStatus;
+            break;
+    }
+
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 33, TEXT_SKIP_DRAW, NULL);
 
     str = gMoveDescriptionPointers[chosenMove - 1];
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NARROW, str, 0, 65, 0, NULL);
