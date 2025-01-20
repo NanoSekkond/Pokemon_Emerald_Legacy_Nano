@@ -193,7 +193,7 @@ struct PokedexView
     u8 typeIconSpriteIds[2]; //HGSS_Ui
     u16 moveSelected; //HGSS_Ui
     u8 moveMax; //HGSS_Ui
-    // u8 splitIconSpriteId;  //HGSS_Ui Physical/Special Split from BE
+    u8 splitIconSpriteId;  //HGSS_Ui Physical/Special Split from BE
     u8 numEggMoves;
     u8 numLevelUpMoves;
     u8 numTMHMMoves;
@@ -343,61 +343,61 @@ static void PrintMonStatsToggle(u8 taskId);
 static void PrintInfoScreenTextWhite(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmall(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmallWhite(const u8* str, u8 left, u8 top);
-// static u8 ShowSplitIcon(u32 split); //Physical/Special Split from BE
-// static void DestroySplitIcon(void); //Physical/Special Split from BE
+static void ShowSplitIcon(u32 split); //Physical/Special Split from BE
+static void DestroySplitIcon(void); //Physical/Special Split from BE
 
 //Physical/Special Split from BE
-// #define TAG_SPLIT_ICONS 30004
-// static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
-// static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
-// static const struct OamData sOamData_SplitIcons =
-// {
-//     .size = SPRITE_SIZE(16x16),
-//     .shape = SPRITE_SHAPE(16x16),
-//     .priority = 0,
-// };
-// static const struct CompressedSpriteSheet sSpriteSheet_SplitIcons =
-// {
-//     .data = sSplitIcons_Gfx,
-//     .size = 16*16*3/2,
-//     .tag = TAG_SPLIT_ICONS,
-// };
-// static const struct SpritePalette sSpritePal_SplitIcons =
-// {
-//     .data = sSplitIcons_Pal,
-//     .tag = TAG_SPLIT_ICONS
-// };
-// static const union AnimCmd sSpriteAnim_SplitIcon0[] =
-// {
-//     ANIMCMD_FRAME(0, 0),
-//     ANIMCMD_END
-// };
-// static const union AnimCmd sSpriteAnim_SplitIcon1[] =
-// {
-//     ANIMCMD_FRAME(4, 0),
-//     ANIMCMD_END
-// };
-// static const union AnimCmd sSpriteAnim_SplitIcon2[] =
-// {
-//     ANIMCMD_FRAME(8, 0),
-//     ANIMCMD_END
-// };
-// static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
-// {
-//     sSpriteAnim_SplitIcon0,
-//     sSpriteAnim_SplitIcon1,
-//     sSpriteAnim_SplitIcon2,
-// };
-// static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
-// {
-//     .tileTag = TAG_SPLIT_ICONS,
-//     .paletteTag = TAG_SPLIT_ICONS,
-//     .oam = &sOamData_SplitIcons,
-//     .anims = sSpriteAnimTable_SplitIcons,
-//     .images = NULL,
-//     .affineAnims = gDummySpriteAffineAnimTable,
-//     .callback = SpriteCallbackDummy
-// };
+#define TAG_SPLIT_ICONS 30004
+static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/summary_screen/split_icons_summary_screen.gbapal");
+static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/summary_screen/split_icons_summary_screen.4bpp.lz");
+static const struct OamData sOamData_SplitIcons =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 0,
+};
+static const struct CompressedSpriteSheet sSpriteSheet_SplitIcons =
+{
+    .data = sSplitIcons_Gfx,
+    .size = 16*16*3/2,
+    .tag = TAG_SPLIT_ICONS,
+};
+static const struct SpritePalette sSpritePal_SplitIcons =
+{
+    .data = sSplitIcons_Pal,
+    .tag = TAG_SPLIT_ICONS
+};
+static const union AnimCmd sSpriteAnim_SplitIcon0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_SplitIcon1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_SplitIcon2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
+{
+    sSpriteAnim_SplitIcon0,
+    sSpriteAnim_SplitIcon1,
+    sSpriteAnim_SplitIcon2,
+};
+static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
+{
+    .tileTag = TAG_SPLIT_ICONS,
+    .paletteTag = TAG_SPLIT_ICONS,
+    .oam = &sOamData_SplitIcons,
+    .anims = sSpriteAnimTable_SplitIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 
 // const rom data
@@ -6063,10 +6063,10 @@ static void Task_LoadStatsScreen(u8 taskId)
         sPokedexView->typeIconSpriteIds[0] = 0xFF;
         sPokedexView->typeIconSpriteIds[1] = 0xFF;
         CreateTypeIconSprites();
-        // sMonSummaryScreen->splitIconSpriteId = 0xFF; //Physical/Special Split from BE
-        // LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60); //Physical/Special Split from BE
-        // LoadCompressedSpriteSheet(&sSpriteSheet_SplitIcons); //Physical/Special Split from BE
-        // LoadSpritePalette(&sSpritePal_SplitIcons); //Physical/Special Split from BE
+        sPokedexView->splitIconSpriteId = 0xFF; //Physical/Special Split from BE
+        LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60); //Physical/Special Split from BE
+        LoadCompressedSpriteSheet(&sSpriteSheet_SplitIcons); //Physical/Special Split from BE
+        LoadSpritePalette(&sSpritePal_SplitIcons); //Physical/Special Split from BE
         gMain.state++;
         break;
     case 4:
@@ -6438,8 +6438,8 @@ static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
 
 
     //Physical/Special Split from BE
-    // DestroySplitIcon();
-    // ShowSplitIcon(GetBattleMoveSplit(move));
+    DestroySplitIcon();
+    ShowSplitIcon(gBattleMoves[move].category);
 }
 // u32 value is re-used, but passed as a bool that's TRUE if national dex is enabled
 static void PrintMonStats(u8 taskId, u32 num, u32 value, u32 owned, u32 newEntry) //HGSS_Ui
@@ -6832,21 +6832,22 @@ static void Task_ExitStatsScreen(u8 taskId)
     }
 }
 
-//Physical/Special Split from BE
-// static u8 ShowSplitIcon(u32 split)
-// {
-//     if (sPokedexListItem->splitIconSpriteId == 0xFF)
-//         sPokedexListItem->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 48, 129, 0);
+static void ShowSplitIcon(u32 split)
+{
+    if (sPokedexView->splitIconSpriteId == 0xFF)
+    {
+        sPokedexView->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 178, 43, 0);
+    }
+    gSprites[sPokedexView->splitIconSpriteId].invisible = FALSE;
+    StartSpriteAnim(&gSprites[sPokedexView->splitIconSpriteId], split);
+}
 
-//     gSprites[sPokedexListItem->splitIconSpriteId].invisible = FALSE;
-//     StartSpriteAnim(&gSprites[sPokedexListItem->splitIconSpriteId], split);
-//     return sPokedexListItem->splitIconSpriteId;
-// }
-
-// static void DestroySplitIcon(void)
-// {
-//     if (sPokedexListItem->splitIconSpriteId != 0xFF)
-//         DestroySprite(&gSprites[sPokedexListItem->splitIconSpriteId]);
-//     sPokedexListItem->splitIconSpriteId = 0xFF;
-// }
+static void DestroySplitIcon(void)
+{
+    if (sPokedexView->splitIconSpriteId != 0xFF)
+    {
+        DestroySprite(&gSprites[sPokedexView->splitIconSpriteId]);
+    }
+    sPokedexView->splitIconSpriteId = 0xFF;
+}
 
