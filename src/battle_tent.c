@@ -70,7 +70,7 @@ void static (*const sVerdanturfTentFuncs[])(void) =
     [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
-static const u16 sVerdanturfTentRewards[] = {ITEM_TM_SNATCH};
+static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
@@ -83,7 +83,7 @@ void static (*const sFallarborTentFuncs[])(void) =
     [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
-static const u16 sFallarborTentRewards[] = {ITEM_TM_TORMENT};
+static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
@@ -99,7 +99,7 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
-static const u16 sSlateportTentRewards[] = {ITEM_TM_SECRET_POWER};
+static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
 void CallVerdanturfTentFunction(void)
@@ -262,8 +262,8 @@ static void GiveSlateportTentPrize(void)
         CopyItemName(gSaveBlock2Ptr->frontier.slateportTentPrize, gStringVar1);
         gSaveBlock2Ptr->frontier.slateportTentPrize = ITEM_NONE;
         gSpecialVar_Result = TRUE;
-        FlagSet(FLAG_RECEIVED_SECRET_POWER);
-	    FlagClear(FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN);
+        //FlagSet(FLAG_RECEIVED_SECRET_POWER);
+	    //FlagClear(FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN);
     }
     else
     {

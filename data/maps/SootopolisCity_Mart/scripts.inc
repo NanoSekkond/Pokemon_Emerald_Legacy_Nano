@@ -19,10 +19,6 @@ SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_TM_STEEL_WING
-	.2byte ITEM_TM_DIG
-	.2byte ITEM_TM_THIEF
-	.2byte ITEM_TM_BULLET_SEED
 	.2byte ITEM_NONE
 	release
 	end
