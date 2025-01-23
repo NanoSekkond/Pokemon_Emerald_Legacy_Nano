@@ -4428,13 +4428,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     else
         description = gExpandedPlaceholder_PokedexDescription;
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(1, description, 0xF0), 93); //HGSS_Ui
-
-    //Type Icon(s) //HGSS_Ui
-    if (owned && !newEntry)
-    {
-        description = gPokedexEntries[num].description;
-        PrintCurrentSpeciesTypeInfo(); //HGSS_Ui
-    }
+    PrintCurrentSpeciesTypeInfo();
 }
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
