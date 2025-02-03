@@ -796,7 +796,7 @@ struct
         .level = 45,
         .nature = NATURE_DOCILE,
         .evs = {0, 0, 0, 0, 0, 0},
-        .moves = {MOVE_REFLECT, MOVE_THUNDER_PUNCH, MOVE_PSYCHIC, MOVE_METAL_CLAW}
+        .moves = {MOVE_REFLECT, MOVE_THUNDER_PUNCH, MOVE_ZEN_HEADBUTT, MOVE_METAL_CLAW}
     }
 };
 

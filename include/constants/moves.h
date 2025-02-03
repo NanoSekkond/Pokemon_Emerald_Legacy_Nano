@@ -358,8 +358,9 @@
 #define MOVE_PSYCHO_BOOST 354
 #define MOVE_SHADOW_CLAW 355
 #define MOVE_SHADOW_SNEAK 356
+#define MOVE_ZEN_HEADBUTT 357
 
-#define MOVES_COUNT 357
+#define MOVES_COUNT 358
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

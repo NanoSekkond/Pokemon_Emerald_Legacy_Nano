@@ -12242,7 +12242,7 @@ static const struct TrainerMon sParty_TateAndLiza5[] = {
     .species = SPECIES_METAGROSS,
     .heldItem = ITEM_WIKI_BERRY,
     .evs = {0, 252, 0, 0, 252, 0},
-    .moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_ICE_PUNCH, MOVE_ROCK_SLIDE}
+    .moves = {MOVE_ZEN_HEADBUTT, MOVE_METEOR_MASH, MOVE_ICE_PUNCH, MOVE_ROCK_SLIDE}
     }
 };
 // Placeholder, Not Used
@@ -12497,7 +12497,7 @@ static const struct TrainerMon sParty_Steven1[] = {
     .lvl = 58,
     .species = SPECIES_METAGROSS,
     .heldItem = ITEM_LUM_BERRY,
-    .moves = {MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_AGILITY}
+    .moves = {MOVE_EARTHQUAKE, MOVE_ZEN_HEADBUTT, MOVE_METEOR_MASH, MOVE_AGILITY}
     }
 }; 
 // Post Game Boss
@@ -12548,7 +12548,7 @@ static const struct TrainerMon sParty_Steven2[] = {
     .species = SPECIES_METAGROSS,
     .heldItem = ITEM_LUM_BERRY,
     .evs = {252, 252, 0, 0, 0, 0},
-    .moves = {MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_FIRE_PUNCH}
+    .moves = {MOVE_EARTHQUAKE, MOVE_ZEN_HEADBUTT, MOVE_METEOR_MASH, MOVE_FIRE_PUNCH}
     }
 };
 
